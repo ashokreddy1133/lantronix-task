@@ -1,0 +1,14 @@
+mat-drawer-container,
+mat-drawer,
+mat-drawer-content,
+mat-sidenav {
+  height: 100%;
+}
+
+mat-drawer {
+  width: 250px;
+}
+
+nav-caption{
+    margin-left: 6px;
+}

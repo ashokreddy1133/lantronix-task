@@ -1,0 +1,35 @@
+<section>
+  <div class = "capabilitiesDiv">
+    <button class = "capability" [ngClass] = "{'m-right10': i !== deviceFeatures.length - 1}" *ngFor = "let feature of deviceFeatures; let i=index;">{{feature}}</button>
+  </div>
+  <p-table (onHeaderCheckboxToggle)="getCommonDeviceFeatures()" (onRowSelect)="getCommonDeviceFeatures()" (onRowUnselect)="getCommonDeviceFeatures()" [columns]="displayedColumns" [value]="devices" [(selection)]="selectedDevices" dataKey="device_id">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th style="width: 3em">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+            <td *ngFor="let col of columns">
+                <ng-container *ngIf = "col.field === 'status'">
+                    <ng-container *ngIf = "rowData[col.field] === 'DISCONNECTED'">
+                        <i class="pi pi-exclamation-triangle disconnectedDevice"></i>
+                    </ng-container>
+                    <ng-container *ngIf = "rowData[col.field] === 'CONNECTED'">
+                        <i class="pi pi-circle-on connectedDevice"></i>
+                    </ng-container>
+                </ng-container>
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+    </p-table>
+</section>
